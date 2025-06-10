@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Gamer Hub — Магазин</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      font-size: 28px;
+      color: #FFD700;
+      font-weight: 700;
+      text-shadow: 0 0 15px #FFD700;
+      animation: blink 1.2s infinite;
+    }
+    @keyframes blink {
+      0%,100% {opacity: 1;}
+      50% {opacity: 0.3;}
+    }
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #121212, #1a1a1a);
+      box-shadow: 0 0 30px #FFD700AA;
+      position: relative;
+    }
+    header h1 {
+      font-size: 3.2rem;
+      color: #FFD700;
+      text-shadow:
+        0 0 10px #FFD700,
+        0 0 20px #FFA500,
+        0 0 30px #FFD700,
+        0 0 40px #FFA500;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #ccc;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-shadow: 0 0 6px #444;
+    }
+
+    #login-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 20px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #FFD700CC, 0 0 24px #FFA500CC;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+    #login-button:hover {
+      background: linear-gradient(90deg, #FFA500, #FFD700);
+      box-shadow: 0 0 18px #FFD700FF, 0 0 36px #FF8C00FF;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 24px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+    }
+    .card {
+      background: #1c1c1c;
+      border-radius: 16px;
+      box-shadow: 0 0 10px #FFD70044, 0 0 20px #FFA50077;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-12px) scale(1.05);
+      box-shadow: 0 0 20px #FFD700CC, 0 0 40px #FFA500DD, 0 0 30px #FF8C00;
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: fill;
+      background: #000;
+      filter: drop-shadow(0 0 6px #FFA500);
+    }
+    .card-body {
+      padding: 20px 16px;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-body h3 {
+      color: #FFD700;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      text-shadow: 0 0 6px #FFD700AA;
+    }
+    .card-body p {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+    .card-body a.button {
+      display: inline-block;
+      padding: 12px 22px;
+      background: linear-gradient(90deg, #FFD700, #FFA500);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #FFD700CC, 0 0 24px #FFA500CC;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+    .card-body a.button:hover {
+      background: linear-gradient(90deg, #FFA500, #FFD700);
+      box-shadow: 0 0 18px #FFD700FF, 0 0 36px #FF8C00FF;
+    }
+
+    .mega-offer {
+      grid-column: span 4;
+      border: 3px solid #FFD700;
+      box-shadow: 0 0 20px #FFD700FF, 0 0 40px #FFA500DD;
+    }
+    .mega-offer h3, .mega-offer p {
+      color: #FFD700 !important;
+      text-shadow: 0 0 10px #FFD700FF;
+    }
+    .mega-offer p span {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      background: #111;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .comment-box {
+      background: rgba(30,30,30,0.95);
+      padding: 24px 28px;
+      border-radius: 16px;
+      max-width: 720px;
+      margin: 0 auto 60px;
+      box-shadow: 0 0 20px #FFD70099;
+      max-height: 320px;
+      overflow-y: auto;
+      font-size: 1rem;
+    }
+    .comment-box h2 {
+      text-align: center;
+      color: #FFD700;
+      margin-bottom: 24px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+    .comment {
+      margin-bottom: 16px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+    }
+    @keyframes fadeIn {
+      to {opacity: 1;}
+    }
+    .comment strong {
+      color: #FFD700;
+    }
+    .comment time {
+      display: block;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    @media(max-width:1024px) {
+      .mega-offer {
+        grid-column: span 2;
+      }
+    }
+    @media(max-width:600px) {
+      .grid {
+        grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+        padding: 30px 15px;
+        gap: 16px;
+      }
+      .card img {
+        height: 120px;
+      }
+      header h1 {
+        font-size: 2.4rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .card-body h3 {
+        font-size: 1.1rem;
+      }
+      .card-body p {
+        font-size: 1rem;
+      }
+      .card-body a.button {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+      }
+      .comment-box {
+        max-width: 90vw;
+        max-height: 240px;
+        padding: 18px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="preloader">Загрузка...</div>
+
+  <header>
+    <h1>⚡Магазин Gamer Hub⚡</h1>
+    <p>🔥Покупай Голду и донать в Standoff 2🔥!</p>
+    <button id="login-button" onclick="location.href='login.html'">Войти</button>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <img src="https://png.klev.club/uploads/posts/2024-04/png-klev-club-39f9-p-golda-standoff-2-png-1.png" alt="G-100" />
+      <div class="card-body">
+        <h3>G-100</h3>
+        <p>119 ₽</p>
+        <a href="http://t.me/send?start=IVdXuDC9OFtX" target="_blank" class="button" rel="noopener noreferrer">Купить</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://png.klev.club/uploads/posts/2024-04/png-klev-club-39f9-p-golda-standoff-2-png-1.png" alt="G-500" />
+      <div class="card-body">
+        <h3>G-500</h3>
+        <p>419 ₽</p>
+        <a href="http://t.me/send?start=IVd9ReAo3kr4" target="_blank" class="button" rel="noopener noreferrer">Купить</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://png.klev.club/uploads/posts/2024-04/png-klev-club-39f9-p-golda-standoff-2-png-1.png" alt="G-1000" />
+      <div class="card-body">
+        <h3>G-1000</h3>
+        <p>749 ₽</p>
+        <a href="http://t.me/send?start=IVjNhSWYXDbW" target="_blank" class="button" rel="noopener noreferrer">Купить</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://png.klev.club/uploads/posts/2024-04/png-klev-club-39f9-p-golda-standoff-2-png-1.png" alt="G-2000" />
+      <div class="card-body">
+        <h3>G-2000</h3>
+        <p>1399 ₽</p>
+        <a href="http://t.me/send?start=IVLrwyUPIhuc" target="_blank" class="button" rel="noopener noreferrer">Купить</a>
+      </div>
+    </div>
+
+    <div class="card mega-offer">
+      <img src="https://png.klev.club/uploads/posts/2024-04/png-klev-club-39f9-p-golda-standoff-2-png-1.png" alt="G-5000" />
+      <div class="card-body">
+        <h3>G-5000 (МЕГА-ПАК)</h3>
+        <p>🎁 1990 ₽ <span>2490 ₽</span></p>
+        <a href="http://t.me/send?start=IVxUHhrE9BOD" target="_blank" class="button" rel="noopener noreferrer">Купить и сэкономить</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-box">
+    <h2>Отзывы</h2>
+    <div id="comment-list"></div>
+  </div>
+
+  <footer>&copy; 2025 Gamer Hub. Все права защищены.</footer>
+
+  <script>
+    // Прелоадер: скрыть после загрузки страницы
+    window.addEventListener('load', function () {
+      const preloader = document.getElementById('preloader');
+      if (preloader) preloader.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>

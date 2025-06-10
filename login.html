@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Вход Администратора — Gamer Hub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Orbitron', Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+  .login-box {
+    background: #121212;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #FFD700, 0 0 60px #FFA500;
+    width: 320px;
+    text-align: center;
+  }
+  h1 {
+    color: #FFD700;
+    margin-bottom: 28px;
+    font-size: 2.8rem;
+    text-shadow: 0 0 25px #FFD700, 0 0 50px #FFA500;
+    letter-spacing: 0.12em;
+  }
+  input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: none;
+    font-size: 1.2rem;
+    background: #222;
+    color: #fff;
+    box-shadow: inset 0 0 14px #FFD70088;
+    transition: box-shadow 0.3s ease;
+    outline: none;
+    user-select: none;
+  }
+  input[type="password"]:focus {
+    box-shadow: 0 0 24px #FFD700, inset 0 0 24px #FFA500;
+  }
+  button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 16px 0;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    border: none;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #000;
+    box-shadow: 0 0 30px #FFD700CC, 0 0 60px #FFA500CC;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+  }
+  button:hover {
+    background: linear-gradient(90deg, #FFA500, #FFD700);
+    box-shadow: 0 0 42px #FFD700FF, 0 0 84px #FF8C00FF;
+  }
+  .error-msg {
+    margin-top: 20px;
+    color: #FF3B3B;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-shadow: 0 0 8px #FF3B3B;
+  }
+</style>
+</head>
+<body>
+
+<div class="login-box">
+  <h1>Вход Админа</h1>
+  <input type="password" id="password" placeholder="Введите пароль" autocomplete="off" />
+  <button onclick="login()">Войти</button>
+  <div id="error-msg" class="error-msg" style="display:none;"></div>
+</div>
+
+<script>
+  const ADMIN_PASSWORD = 'Seitnebi2008'; // Твой пароль
+
+  function login() {
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('error-msg');
+
+    if (pass === ADMIN_PASSWORD) {
+      errorMsg.style.display = 'none';
+      window.location.href = 'admin.html'; // Переход в админку
+    } else {
+      errorMsg.textContent = 'Неверный пароль!';
+      errorMsg.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
